@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RfidCsharp", "RfidCsharp.csproj", "{71F46FF7-A779-4408-A3F8-A4CA8CCA2FB0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71F46FF7-A779-4408-A3F8-A4CA8CCA2FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F46FF7-A779-4408-A3F8-A4CA8CCA2FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F46FF7-A779-4408-A3F8-A4CA8CCA2FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F46FF7-A779-4408-A3F8-A4CA8CCA2FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD78E152-F8F0-40A7-9807-F7D1A7A122C2}
+	EndGlobalSection
+EndGlobal
