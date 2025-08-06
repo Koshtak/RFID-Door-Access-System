@@ -1,0 +1,23 @@
+# Ignore Visual Studio files
+*.exe
+*.dll
+*.obj
+*.pdb
+*.cache
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore build folders
+bin/
+obj/
+.vs/
+
+# Ignore SQL Server local database files
+*.mdf
+*.ldf
+
+# Ignore system files
+Thumbs.db
+Desktop.ini
