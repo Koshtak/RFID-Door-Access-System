@@ -31,25 +31,26 @@ namespace RfidCsharpKodlari
             string uid = serialPort1.ReadLine().Trim();//arduinodan id al, boşlukları temizle.
             bool isAuthorized = false;
             string connectionString = "server=localhost;Database=rfidsystem;Trusted_Connection=True;";
+
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM authorizedCards WHERE CardUID=@uid", conn);
+                cmd.Parameters.AddWithValue("@uid", uid);
+
+                int count = (int)cmd.ExecuteScalar();
+                isAuthorized = (count > 0);
+            }
+
+
+            if (isAuthorized)
+                serialPort1.WriteLine("ACCESS_GRANTED");
+            else
+                serialPort1.WriteLine("ACCESS_DENIED");
+
         }
-
-        using(SqlConnection conn = new SqlConnection(string connectionString) )
-        {
-        conn.Open();
-        
-        SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM authorizedCards WHERE CardUID=@uid", conn);
-        cmd.Parameters.AddWithValue("@uid", uid);
-
-        int count = (int).cmd.ExecuteScalar();
-        isAuthorized = (Count > 0);
-        }
-
-if (isAuthorized)
-    serialPort1.WriteLine("ACCESS_GRANTED");
-else
-    serialPort1.WriteLine("ACCESS_DENIED"); 
-
-
 
     }
 }
