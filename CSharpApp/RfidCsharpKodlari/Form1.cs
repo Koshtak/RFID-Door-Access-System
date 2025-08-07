@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
@@ -68,16 +69,15 @@ namespace RfidCsharpKodlari
         }
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            string uid = serialPort1.ReadLine().Trim();
+            // Debug output to verify what's being received
+            Debug.WriteLine($"Received UID: {uid}");
 
-
-            string uid = serialPort1.ReadLine().Trim();//arduinodan id al, boşlukları temizle.
             bool isAuthorized = CheckAuthorization(uid);
-
             string response = isAuthorized ? "ACCESS_GRANTED" : "ACCESS_DENIED";
+
             serialPort1.WriteLine(response);
-
-            Invoke(new Action(() =>{ Log($"Card Read: {uid} → {response}");}));
-
+            Invoke(new Action(() => Log($"Card Read: {uid} → {response}")));
         }
 
         private bool CheckAuthorization(string uid)
