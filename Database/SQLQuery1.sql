@@ -9,3 +9,4 @@ CreatedAt datetime default getdate()
 
 insert into authorizedCards(CardUID, UserName)
 values('03:FB:91:F6', 'efe mehmet')
+

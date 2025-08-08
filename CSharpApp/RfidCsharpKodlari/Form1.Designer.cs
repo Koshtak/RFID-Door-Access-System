@@ -44,35 +44,35 @@
             // 
             // btnAddUID
             // 
-            this.btnAddUID.Location = new System.Drawing.Point(424, 292);
+            this.btnAddUID.Location = new System.Drawing.Point(564, 181);
             this.btnAddUID.Name = "btnAddUID";
-            this.btnAddUID.Size = new System.Drawing.Size(75, 23);
+            this.btnAddUID.Size = new System.Drawing.Size(100, 23);
             this.btnAddUID.TabIndex = 3;
-            this.btnAddUID.Text = "add";
+            this.btnAddUID.Text = "Add UID";
             this.btnAddUID.UseVisualStyleBackColor = true;
             this.btnAddUID.Click += new System.EventHandler(this.btnAddUID_Click);
             // 
             // btnRemoveUID
             // 
-            this.btnRemoveUID.Location = new System.Drawing.Point(561, 293);
+            this.btnRemoveUID.Location = new System.Drawing.Point(106, 312);
             this.btnRemoveUID.Name = "btnRemoveUID";
             this.btnRemoveUID.Size = new System.Drawing.Size(75, 23);
             this.btnRemoveUID.TabIndex = 4;
-            this.btnRemoveUID.Text = "remove";
+            this.btnRemoveUID.Text = "Remove";
             this.btnRemoveUID.UseVisualStyleBackColor = true;
             this.btnRemoveUID.Click += new System.EventHandler(this.btnRemoveUID_Click);
             // 
             // dataGridViewCards
             // 
             this.dataGridViewCards.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCards.Location = new System.Drawing.Point(307, 121);
+            this.dataGridViewCards.Location = new System.Drawing.Point(106, 136);
             this.dataGridViewCards.Name = "dataGridViewCards";
-            this.dataGridViewCards.Size = new System.Drawing.Size(240, 150);
+            this.dataGridViewCards.Size = new System.Drawing.Size(443, 150);
             this.dataGridViewCards.TabIndex = 5;
             // 
             // txtNewUID
             // 
-            this.txtNewUID.Location = new System.Drawing.Point(106, 295);
+            this.txtNewUID.Location = new System.Drawing.Point(564, 136);
             this.txtNewUID.Name = "txtNewUID";
             this.txtNewUID.Size = new System.Drawing.Size(100, 20);
             this.txtNewUID.TabIndex = 6;
@@ -80,11 +80,11 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(106, 31);
+            this.txtLog.Location = new System.Drawing.Point(106, 42);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.ReadOnly = true;
-            this.txtLog.Size = new System.Drawing.Size(100, 20);
+            this.txtLog.Size = new System.Drawing.Size(443, 88);
             this.txtLog.TabIndex = 7;
             // 
             // Form1

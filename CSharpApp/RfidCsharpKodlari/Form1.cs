@@ -73,6 +73,8 @@ namespace RfidCsharpKodlari
             // Debug output to verify what's being received
             Debug.WriteLine($"Received UID: {uid}");
 
+            Invoke(new Action(() => txtNewUID.Text = uid));
+
             bool isAuthorized = CheckAuthorization(uid);
             string response = isAuthorized ? "ACCESS_GRANTED" : "ACCESS_DENIED";
 
@@ -142,14 +144,49 @@ namespace RfidCsharpKodlari
                 {
                     conn.Open();
 
-                    string query = "DELETE FROM authorizedCards WHERE CardUID = @uid";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@uid", uidToRemove);
-                    cmd.ExecuteNonQuery();
-                }
+                    // Begin transaction to ensure atomic operation
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            // 1. First delete the record
+                            string deleteQuery = "DELETE FROM authorizedCards WHERE CardUID = @uid";
+                            SqlCommand deleteCmd = new SqlCommand(deleteQuery, conn, transaction);
+                            deleteCmd.Parameters.AddWithValue("@uid", uidToRemove);
+                            int rowsAffected = deleteCmd.ExecuteNonQuery();
 
-                Log($"Removed UID: {uidToRemove}");
-                LoadAuthorizedCards();
+                            if (rowsAffected > 0)
+                            {
+                                // 2. Check if table is now empty
+                                string countQuery = "SELECT COUNT(*) FROM authorizedCards";
+                                SqlCommand countCmd = new SqlCommand(countQuery, conn, transaction);
+                                int remainingRows = (int)countCmd.ExecuteScalar();
+
+                                // 3. Reset identity if table is empty
+                                if (remainingRows == 0)
+                                {
+                                    SqlCommand resetCmd = new SqlCommand(
+                                        "DBCC CHECKIDENT ('authorizedCards', RESEED, 0)",
+                                        conn, transaction);
+                                    resetCmd.ExecuteNonQuery();
+                                }
+
+                                transaction.Commit();
+                                Log($"Successfully removed UID: {uidToRemove}");
+                                LoadAuthorizedCards();
+                            }
+                            else
+                            {
+                                Log("No records were deleted.");
+                            }
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
