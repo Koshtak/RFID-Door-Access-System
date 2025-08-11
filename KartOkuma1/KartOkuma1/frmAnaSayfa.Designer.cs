@@ -44,13 +44,13 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.btnIstatistik = new System.Windows.Forms.Button();
             this.btnTemizle = new System.Windows.Forms.Button();
             this.btnGüncelle = new System.Windows.Forms.Button();
             this.btnSil = new System.Windows.Forms.Button();
             this.btnKaydet = new System.Windows.Forms.Button();
             this.btnListele = new System.Windows.Forms.Button();
-            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -75,6 +75,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.83333F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // panel1
             // 
@@ -251,9 +252,15 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(794, 89);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
+            // serialPort1
+            // 
+            this.serialPort1.PortName = "COM4";
+            // 
             // btnIstatistik
             // 
             this.btnIstatistik.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnIstatistik.Image = global::KartOkuma1.Properties.Resources.statistics;
+            this.btnIstatistik.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnIstatistik.Location = new System.Drawing.Point(531, 47);
             this.btnIstatistik.Name = "btnIstatistik";
             this.btnIstatistik.Size = new System.Drawing.Size(260, 39);
@@ -266,6 +273,8 @@
             // btnTemizle
             // 
             this.btnTemizle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTemizle.Image = global::KartOkuma1.Properties.Resources.archeology;
+            this.btnTemizle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTemizle.Location = new System.Drawing.Point(267, 47);
             this.btnTemizle.Name = "btnTemizle";
             this.btnTemizle.Size = new System.Drawing.Size(258, 39);
@@ -278,6 +287,8 @@
             // btnGüncelle
             // 
             this.btnGüncelle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnGüncelle.Image = global::KartOkuma1.Properties.Resources.refresh__1_;
+            this.btnGüncelle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGüncelle.Location = new System.Drawing.Point(3, 47);
             this.btnGüncelle.Name = "btnGüncelle";
             this.btnGüncelle.Size = new System.Drawing.Size(258, 39);
@@ -290,6 +301,8 @@
             // btnSil
             // 
             this.btnSil.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSil.Image = global::KartOkuma1.Properties.Resources.remove;
+            this.btnSil.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSil.Location = new System.Drawing.Point(531, 3);
             this.btnSil.Name = "btnSil";
             this.btnSil.Size = new System.Drawing.Size(260, 38);
@@ -302,6 +315,8 @@
             // btnKaydet
             // 
             this.btnKaydet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnKaydet.Image = global::KartOkuma1.Properties.Resources.save;
+            this.btnKaydet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnKaydet.Location = new System.Drawing.Point(267, 3);
             this.btnKaydet.Name = "btnKaydet";
             this.btnKaydet.Size = new System.Drawing.Size(258, 38);
@@ -314,6 +329,8 @@
             // btnListele
             // 
             this.btnListele.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnListele.Image = global::KartOkuma1.Properties.Resources.bullet_list;
+            this.btnListele.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnListele.Location = new System.Drawing.Point(3, 3);
             this.btnListele.Name = "btnListele";
             this.btnListele.Size = new System.Drawing.Size(258, 38);
@@ -322,10 +339,6 @@
             this.btnListele.UseVisualStyleBackColor = true;
             this.btnListele.UseWaitCursor = true;
             this.btnListele.Click += new System.EventHandler(this.btnListele_Click);
-            // 
-            // serialPort1
-            // 
-            this.serialPort1.PortName = "COM4";
             // 
             // frmAnaSayfa
             // 

@@ -159,5 +159,10 @@ namespace KartOkuma1
             frmIstatistic fr = new frmIstatistic();
             fr.Show();
         }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
