@@ -1,0 +1,6 @@
+@rfidAPI_HostAddress = http://localhost:5048
+
+GET {{rfidAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
