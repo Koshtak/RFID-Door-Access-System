@@ -30,5 +30,13 @@ namespace KartOkuma1
                 MessageBox.Show("Lütfen Tüm Alanları Doldurunuz", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void frmKyt_Load(object sender, EventArgs e)
+        {
+            {
+                this.AcceptButton = btnKayıtOl;
+                txtSifre.Multiline = false;
+            }
+        }
     }
 }

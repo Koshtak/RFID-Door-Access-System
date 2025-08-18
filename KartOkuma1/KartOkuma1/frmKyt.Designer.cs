@@ -133,6 +133,7 @@
             this.Name = "frmKyt";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmKyt";
+            this.Load += new System.EventHandler(this.frmKyt_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

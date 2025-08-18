@@ -44,18 +44,24 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.btnIstatistik = new System.Windows.Forms.Button();
             this.btnTemizle = new System.Windows.Forms.Button();
             this.btnGüncelle = new System.Windows.Forms.Button();
             this.btnSil = new System.Windows.Forms.Button();
             this.btnKaydet = new System.Windows.Forms.Button();
             this.btnListele = new System.Windows.Forms.Button();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.rbEvet = new System.Windows.Forms.RadioButton();
+            this.rbHayir = new System.Windows.Forms.RadioButton();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.lblKontrol = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -65,6 +71,7 @@
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -73,7 +80,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.83333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(925, 450);
             this.tableLayoutPanel1.TabIndex = 1;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
@@ -83,22 +91,22 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(794, 50);
+            this.panel1.Size = new System.Drawing.Size(919, 50);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 10;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.33333F));
             this.tableLayoutPanel2.Controls.Add(this.txtKartID, 9, 0);
             this.tableLayoutPanel2.Controls.Add(this.label5, 8, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtKytTarih, 7, 0);
@@ -114,26 +122,25 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(794, 50);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(919, 50);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // txtKartID
             // 
             this.txtKartID.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtKartID.Location = new System.Drawing.Point(714, 3);
+            this.txtKartID.Location = new System.Drawing.Point(796, 3);
             this.txtKartID.Multiline = true;
             this.txtKartID.Name = "txtKartID";
-            this.txtKartID.Size = new System.Drawing.Size(77, 44);
+            this.txtKartID.Size = new System.Drawing.Size(120, 44);
             this.txtKartID.TabIndex = 9;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(635, 0);
+            this.label5.Location = new System.Drawing.Point(735, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 50);
+            this.label5.Size = new System.Drawing.Size(55, 50);
             this.label5.TabIndex = 8;
             this.label5.Text = "Kart ID";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -142,19 +149,19 @@
             // 
             this.txtKytTarih.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtKytTarih.Enabled = false;
-            this.txtKytTarih.Location = new System.Drawing.Point(556, 3);
+            this.txtKytTarih.Location = new System.Drawing.Point(613, 3);
             this.txtKytTarih.Multiline = true;
             this.txtKytTarih.Name = "txtKytTarih";
-            this.txtKytTarih.Size = new System.Drawing.Size(73, 44);
+            this.txtKytTarih.Size = new System.Drawing.Size(116, 44);
             this.txtKytTarih.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(477, 0);
+            this.label4.Location = new System.Drawing.Point(552, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 50);
+            this.label4.Size = new System.Drawing.Size(55, 50);
             this.label4.TabIndex = 6;
             this.label4.Text = "Kayıt Tarihi";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -162,19 +169,19 @@
             // txtSOYAD
             // 
             this.txtSOYAD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSOYAD.Location = new System.Drawing.Point(398, 3);
+            this.txtSOYAD.Location = new System.Drawing.Point(430, 3);
             this.txtSOYAD.Multiline = true;
             this.txtSOYAD.Name = "txtSOYAD";
-            this.txtSOYAD.Size = new System.Drawing.Size(73, 44);
+            this.txtSOYAD.Size = new System.Drawing.Size(116, 44);
             this.txtSOYAD.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(319, 0);
+            this.label3.Location = new System.Drawing.Point(369, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 50);
+            this.label3.Size = new System.Drawing.Size(55, 50);
             this.label3.TabIndex = 4;
             this.label3.Text = "Soyad";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -182,19 +189,19 @@
             // txtAD
             // 
             this.txtAD.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAD.Location = new System.Drawing.Point(240, 3);
+            this.txtAD.Location = new System.Drawing.Point(247, 3);
             this.txtAD.Multiline = true;
             this.txtAD.Name = "txtAD";
-            this.txtAD.Size = new System.Drawing.Size(73, 44);
+            this.txtAD.Size = new System.Drawing.Size(116, 44);
             this.txtAD.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(161, 0);
+            this.label2.Location = new System.Drawing.Point(186, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 50);
+            this.label2.Size = new System.Drawing.Size(55, 50);
             this.label2.TabIndex = 2;
             this.label2.Text = "Ad";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -205,7 +212,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 50);
+            this.label1.Size = new System.Drawing.Size(55, 50);
             this.label1.TabIndex = 0;
             this.label1.Text = "Kişi ID";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -214,10 +221,10 @@
             // 
             this.txtID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtID.Enabled = false;
-            this.txtID.Location = new System.Drawing.Point(82, 3);
+            this.txtID.Location = new System.Drawing.Point(64, 3);
             this.txtID.Multiline = true;
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(73, 44);
+            this.txtID.Size = new System.Drawing.Size(116, 44);
             this.txtID.TabIndex = 1;
             // 
             // dataGridView1
@@ -227,9 +234,10 @@
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 96);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(794, 256);
+            this.dataGridView1.Size = new System.Drawing.Size(919, 256);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // tableLayoutPanel3
             // 
@@ -249,21 +257,17 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(794, 89);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(919, 89);
             this.tableLayoutPanel3.TabIndex = 2;
-            // 
-            // serialPort1
-            // 
-            this.serialPort1.PortName = "COM4";
             // 
             // btnIstatistik
             // 
             this.btnIstatistik.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnIstatistik.Image = global::KartOkuma1.Properties.Resources.statistics;
             this.btnIstatistik.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnIstatistik.Location = new System.Drawing.Point(531, 47);
+            this.btnIstatistik.Location = new System.Drawing.Point(615, 47);
             this.btnIstatistik.Name = "btnIstatistik";
-            this.btnIstatistik.Size = new System.Drawing.Size(260, 39);
+            this.btnIstatistik.Size = new System.Drawing.Size(301, 39);
             this.btnIstatistik.TabIndex = 6;
             this.btnIstatistik.Text = "İSTATİSTİKLER";
             this.btnIstatistik.UseVisualStyleBackColor = true;
@@ -275,9 +279,9 @@
             this.btnTemizle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTemizle.Image = global::KartOkuma1.Properties.Resources.archeology;
             this.btnTemizle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTemizle.Location = new System.Drawing.Point(267, 47);
+            this.btnTemizle.Location = new System.Drawing.Point(309, 47);
             this.btnTemizle.Name = "btnTemizle";
-            this.btnTemizle.Size = new System.Drawing.Size(258, 39);
+            this.btnTemizle.Size = new System.Drawing.Size(300, 39);
             this.btnTemizle.TabIndex = 5;
             this.btnTemizle.Text = "TEMİZLE";
             this.btnTemizle.UseVisualStyleBackColor = true;
@@ -291,7 +295,7 @@
             this.btnGüncelle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGüncelle.Location = new System.Drawing.Point(3, 47);
             this.btnGüncelle.Name = "btnGüncelle";
-            this.btnGüncelle.Size = new System.Drawing.Size(258, 39);
+            this.btnGüncelle.Size = new System.Drawing.Size(300, 39);
             this.btnGüncelle.TabIndex = 4;
             this.btnGüncelle.Text = "GÜNCELLE";
             this.btnGüncelle.UseVisualStyleBackColor = true;
@@ -303,9 +307,9 @@
             this.btnSil.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnSil.Image = global::KartOkuma1.Properties.Resources.remove;
             this.btnSil.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSil.Location = new System.Drawing.Point(531, 3);
+            this.btnSil.Location = new System.Drawing.Point(615, 3);
             this.btnSil.Name = "btnSil";
-            this.btnSil.Size = new System.Drawing.Size(260, 38);
+            this.btnSil.Size = new System.Drawing.Size(301, 38);
             this.btnSil.TabIndex = 3;
             this.btnSil.Text = "SİL";
             this.btnSil.UseVisualStyleBackColor = true;
@@ -314,12 +318,13 @@
             // 
             // btnKaydet
             // 
+            this.btnKaydet.Cursor = System.Windows.Forms.Cursors.WaitCursor;
             this.btnKaydet.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnKaydet.Image = global::KartOkuma1.Properties.Resources.save;
             this.btnKaydet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnKaydet.Location = new System.Drawing.Point(267, 3);
+            this.btnKaydet.Location = new System.Drawing.Point(309, 3);
             this.btnKaydet.Name = "btnKaydet";
-            this.btnKaydet.Size = new System.Drawing.Size(258, 38);
+            this.btnKaydet.Size = new System.Drawing.Size(300, 38);
             this.btnKaydet.TabIndex = 2;
             this.btnKaydet.Text = "KAYDET";
             this.btnKaydet.UseVisualStyleBackColor = true;
@@ -333,18 +338,90 @@
             this.btnListele.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnListele.Location = new System.Drawing.Point(3, 3);
             this.btnListele.Name = "btnListele";
-            this.btnListele.Size = new System.Drawing.Size(258, 38);
+            this.btnListele.Size = new System.Drawing.Size(300, 38);
             this.btnListele.TabIndex = 1;
             this.btnListele.Text = "LİSTELE";
             this.btnListele.UseVisualStyleBackColor = true;
             this.btnListele.UseWaitCursor = true;
             this.btnListele.Click += new System.EventHandler(this.btnListele_Click);
             // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.tableLayoutPanel4.ColumnCount = 4;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.Controls.Add(this.label6, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.rbEvet, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.rbHayir, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.lblKontrol, 3, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 59);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(919, 31);
+            this.tableLayoutPanel4.TabIndex = 3;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(293, 31);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Yetki:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // rbEvet
+            // 
+            this.rbEvet.AutoSize = true;
+            this.rbEvet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rbEvet.Location = new System.Drawing.Point(302, 3);
+            this.rbEvet.Name = "rbEvet";
+            this.rbEvet.Size = new System.Drawing.Size(293, 25);
+            this.rbEvet.TabIndex = 1;
+            this.rbEvet.TabStop = true;
+            this.rbEvet.Text = "EVET";
+            this.rbEvet.UseVisualStyleBackColor = true;
+            this.rbEvet.CheckedChanged += new System.EventHandler(this.rbEvet_CheckedChanged);
+            // 
+            // rbHayir
+            // 
+            this.rbHayir.AutoSize = true;
+            this.rbHayir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rbHayir.Location = new System.Drawing.Point(601, 3);
+            this.rbHayir.Name = "rbHayir";
+            this.rbHayir.Size = new System.Drawing.Size(293, 25);
+            this.rbHayir.TabIndex = 2;
+            this.rbHayir.TabStop = true;
+            this.rbHayir.Text = "HAYIR";
+            this.rbHayir.UseVisualStyleBackColor = true;
+            // 
+            // serialPort1
+            // 
+            this.serialPort1.PortName = "COM4";
+            // 
+            // lblKontrol
+            // 
+            this.lblKontrol.AutoSize = true;
+            this.lblKontrol.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblKontrol.Location = new System.Drawing.Point(900, 0);
+            this.lblKontrol.Name = "lblKontrol";
+            this.lblKontrol.Size = new System.Drawing.Size(16, 31);
+            this.lblKontrol.TabIndex = 3;
+            this.lblKontrol.Text = "label7";
+            this.lblKontrol.Visible = false;
+            this.lblKontrol.TextChanged += new System.EventHandler(this.lblKontrol_TextChanged);
+            // 
             // frmAnaSayfa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(925, 450);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.Name = "frmAnaSayfa";
@@ -357,6 +434,8 @@
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -377,6 +456,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button btnIstatistik;
         private System.Windows.Forms.Button btnTemizle;
@@ -384,6 +464,10 @@
         private System.Windows.Forms.Button btnSil;
         private System.Windows.Forms.Button btnKaydet;
         private System.Windows.Forms.Button btnListele;
-        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RadioButton rbEvet;
+        private System.Windows.Forms.RadioButton rbHayir;
+        private System.Windows.Forms.Label lblKontrol;
     }
 }

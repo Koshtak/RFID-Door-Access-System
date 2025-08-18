@@ -27,6 +27,9 @@ namespace KartOkuma1
         {
             toplamKayit();
             bgnKayit();
+            toplamYetkiliSay();
+            toplamYetkisizSay();
+                
         }
 
 
@@ -52,5 +55,27 @@ namespace KartOkuma1
             }
 
         }
+
+        private void toplamYetkiliSay()
+        {
+            SqlCommand toplamYetkiliSay = new SqlCommand("select COUNT(*) from Kayıt WHERE yetki = 1", bgl.baglan());
+            SqlDataReader dr = toplamYetkiliSay.ExecuteReader();
+            while (dr.Read())
+            {
+                lblYetkiliSay.Text = dr[0].ToString();
+            }
+        }
+
+        private void toplamYetkisizSay()
+        {
+            SqlCommand toplamYetkisizSay = new SqlCommand("select COUNT(*) from Kayıt WHERE yetki = 0", bgl.baglan());
+            SqlDataReader dr = toplamYetkisizSay.ExecuteReader();
+            while (dr.Read())
+            {
+                lblYetkisizSay.Text = dr[0].ToString();
+            }
+        }
+
+
     }
 }

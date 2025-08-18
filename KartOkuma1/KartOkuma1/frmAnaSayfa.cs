@@ -68,17 +68,17 @@ namespace KartOkuma1
             txtSOYAD.Text = dataGridView1.Rows[sec].Cells[2].Value.ToString();
             txtKytTarih.Text = dataGridView1.Rows[sec].Cells[3].Value.ToString();
             txtKartID.Text = dataGridView1.Rows[sec].Cells[4].Value.ToString();
-            
-
+            lblKontrol.Text = dataGridView1.Rows[sec].Cells[5].Value.ToString();
 
 
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
-            if(txtAD.Text != "" && txtSOYAD.Text != "" && txtKytTarih.Text != "" && txtKartID.Text != "")
+            if(txtAD.Text != "" && txtSOYAD.Text != "" && txtKartID.Text != "")
             {
                 kaydet();
+               
             }
             else
             {
@@ -94,14 +94,30 @@ namespace KartOkuma1
             kaydet.Parameters.AddWithValue("soyad", txtSOYAD.Text);
             kaydet.Parameters.AddWithValue("date", DateTime.Now);
             kaydet.Parameters.AddWithValue("kid", txtKartID.Text);
+            if(lblKontrol.Text == "True")
+            {
+                kaydet.Parameters.AddWithValue("yetki", 1);
+            }
+            else
+            {
+                kaydet.Parameters.AddWithValue("yetki", 0);
+            }
+
+
             kaydet.ExecuteNonQuery();
             MessageBox.Show("Kayıt Başarıyla Eklendi", "Kayıt Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (serialPort1.IsOpen)
+            {
+                string mesaj = "KAYIT:" + txtAD.Text + " " + txtSOYAD.Text;
+                serialPort1.WriteLine(mesaj);
+            }
             Listele();
         }
 
         private void btnSil_Click(object sender, EventArgs e)
         {
             sil();
+            
         }
 
 
@@ -115,6 +131,11 @@ namespace KartOkuma1
                 sil.Parameters.AddWithValue("id", int.Parse(txtID.Text));
                 sil.ExecuteNonQuery();
                 MessageBox.Show("Kayıt Başarıyla Silindi", "Kayıt Silindi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (serialPort1.IsOpen)
+                {
+                    string mesaj = "SIL:" + txtAD.Text + " " + txtSOYAD.Text;
+                    serialPort1.WriteLine(mesaj);
+                }
                 Listele();            
             }
 
@@ -133,6 +154,14 @@ namespace KartOkuma1
                 guncelle.Parameters.AddWithValue("soyad", txtSOYAD.Text);
                 guncelle.Parameters.AddWithValue("date", DateTime.Now);
                 guncelle.Parameters.AddWithValue("kid", txtKartID.Text);
+                if (lblKontrol.Text == "True")
+                {
+                    guncelle.Parameters.AddWithValue("yetki", 1);
+                }
+                else
+                {
+                    guncelle.Parameters.AddWithValue("yetki", 0);
+                }
                 guncelle.ExecuteNonQuery();
                 MessageBox.Show("Kayıt Başarıyla Güncellendi", "Güncelleme Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Listele();
@@ -146,6 +175,8 @@ namespace KartOkuma1
             txtSOYAD.Text = "";
             txtKartID.Text = "";
             txtKytTarih.Text = "";
+            rbHayir.Checked = true;
+            lblKontrol.Text = "False";
               
         }
 
@@ -163,6 +194,35 @@ namespace KartOkuma1
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void rbEvet_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbEvet.Checked == true)
+            {
+                lblKontrol.Text = "True";
+            }
+            else
+            {
+                lblKontrol.Text = "False";
+            }
+        }
+
+        private void lblKontrol_TextChanged(object sender, EventArgs e)
+        {
+            if(lblKontrol.Text == "True")
+            {
+                rbEvet.Checked = true;
+            }
+            else
+            {
+                rbHayir.Checked = true;
+            }
         }
     }
 }
