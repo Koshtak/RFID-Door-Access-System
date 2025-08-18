@@ -8,5 +8,12 @@ namespace rfidAPI.Data
         public RfidDbContext(DbContextOptions<RfidDbContext> options ) : base(options) { }
         public DbSet <AuthorizedCard> AuthorizedCards { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<AuthorizedCard>()
+                .HasIndex(c => c.CardUID)
+                .IsUnique();
+        }
+
     }
 }

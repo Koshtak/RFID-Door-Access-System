@@ -11,25 +11,31 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
+using System.Net.Http.Json; // for convenient JSON methods
+
 
 namespace RfidCsharpKodlari
 {
     public partial class Form1 : Form
     {
-        private readonly string connectionString = "server=localhost;Database=rfidsystem;Trusted_Connection=True;";
+        private static readonly HttpClient http = new HttpClient();
+
+        private readonly string apiBase = "https://localhost:7168/api/cards";
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             InitializeSerialPort();
-            LoadAuthorizedCards();
+            await LoadAuthorizedCardsAsync();
         }
 
-       
+
+
         private void InitializeSerialPort()
         {
             try
@@ -45,154 +51,118 @@ namespace RfidCsharpKodlari
 
         }
 
-        private void LoadAuthorizedCards()
+        private async Task LoadAuthorizedCardsAsync()
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string query = "SELECT * FROM authorizedCards";
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
-
-                    System.Data.DataTable dt = new System.Data.DataTable();
-                    adapter.Fill(dt);
-                    dataGridViewCards.DataSource = dt;
-
-                    Log("Cards loaded from database.");
-                }
+                var list = await http.GetFromJsonAsync<List<AuthorizedCardDto>>(apiBase);
+                // Show in grid
+                dataGridViewCards.DataSource = list;
+                Log("Cards loaded from API.");
             }
             catch (Exception ex)
             {
-                Log("Error loading cards: " + ex.Message);
+                Log("Error loading cards from API: " + ex.Message);
             }
         }
+
+        // Small DTO just for the grid (you can also reuse your model shape)
+        private class AuthorizedCardDto
+        {
+            public int Id { get; set; }
+            public string CardUID { get; set; }
+            public string UserName { get; set; }
+            public DateTime CreatedAt { get; set; }
+        }
+
         private void SerialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string uid = serialPort1.ReadLine().Trim();
-            // Debug output to verify what's being received
-            Debug.WriteLine($"Received UID: {uid}");
+            BeginInvoke(new Action(async () =>
+            {
+                txtNewUID.Text = uid;
 
-            Invoke(new Action(() => txtNewUID.Text = uid));
+                bool isAuthorized = await CheckAuthorizationAsync(uid);
+                string response = isAuthorized ? "ACCESS_GRANTED" : "ACCESS_DENIED";
 
-            bool isAuthorized = CheckAuthorization(uid);
-            string response = isAuthorized ? "ACCESS_GRANTED" : "ACCESS_DENIED";
-
-            serialPort1.WriteLine(response);
-            Invoke(new Action(() => Log($"Card Read: {uid} → {response}")));
+                serialPort1.WriteLine(response);
+                Log($"Card Read: {uid} → {response}");
+            }));
         }
 
-        private bool CheckAuthorization(string uid)
+
+        private async Task<bool> CheckAuthorizationAsync(string uid)
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    string query = "SELECT COUNT(*) FROM authorizedCards WHERE CardUID = @uid";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@uid", uid);
-
-                    int count = (int)cmd.ExecuteScalar();
-                    return count > 0;
-                }
+                var result = await http.GetFromJsonAsync<AuthResult>($"{apiBase}/check/{Uri.EscapeDataString(uid)}");
+                return result?.authorized ?? false;
             }
             catch (Exception ex)
             {
-                Invoke(new Action(() =>{Log("Error checking UID: " + ex.Message);}));
+                Log("Error checking UID via API: " + ex.Message);
                 return false;
             }
         }
 
-        private void btnAddUID_Click(object sender, EventArgs e)
+        private class AuthResult { public bool authorized { get; set; } }
+
+
+        private async void btnAddUID_Click(object sender, EventArgs e)
         {
             string newUID = txtNewUID.Text.Trim();
             if (string.IsNullOrEmpty(newUID)) return;
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                var payload = new { CardUID = newUID, UserName = "" };
+                var res = await http.PostAsJsonAsync(apiBase, payload);
+                if (res.IsSuccessStatusCode)
                 {
-                    conn.Open();
-
-                    string query = "INSERT INTO authorizedCards (CardUID) VALUES (@uid)";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@uid", newUID);
-                    cmd.ExecuteNonQuery();
+                    Log($"Added UID via API: {newUID}");
+                    txtNewUID.Clear();
+                    await LoadAuthorizedCardsAsync();
                 }
-
-                Log($"Added UID: {newUID}");
-                txtNewUID.Clear();
-                LoadAuthorizedCards();
+                else if (res.StatusCode == System.Net.HttpStatusCode.Conflict)
+                {
+                    Log("UID already exists.");
+                }
+                else
+                {
+                    Log("Add failed: " + res.StatusCode);
+                }
             }
             catch (Exception ex)
             {
-                Log("Error adding UID: " + ex.Message);
+                Log("Error adding UID via API: " + ex.Message);
             }
         }
 
-        private void btnRemoveUID_Click(object sender, EventArgs e)
+
+        private async void btnRemoveUID_Click(object sender, EventArgs e)
         {
             if (dataGridViewCards.CurrentRow == null) return;
 
-            string uidToRemove = dataGridViewCards.CurrentRow.Cells["CardUID"].Value.ToString();
-
+            int id = Convert.ToInt32(dataGridViewCards.CurrentRow.Cells["Id"].Value);
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                var res = await http.DeleteAsync($"{apiBase}/{id}");
+                if (res.IsSuccessStatusCode || res.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    conn.Open();
-
-                    // Begin transaction to ensure atomic operation
-                    using (SqlTransaction transaction = conn.BeginTransaction())
-                    {
-                        try
-                        {
-                            // 1. First delete the record
-                            string deleteQuery = "DELETE FROM authorizedCards WHERE CardUID = @uid";
-                            SqlCommand deleteCmd = new SqlCommand(deleteQuery, conn, transaction);
-                            deleteCmd.Parameters.AddWithValue("@uid", uidToRemove);
-                            int rowsAffected = deleteCmd.ExecuteNonQuery();
-
-                            if (rowsAffected > 0)
-                            {
-                                // 2. Check if table is now empty
-                                string countQuery = "SELECT COUNT(*) FROM authorizedCards";
-                                SqlCommand countCmd = new SqlCommand(countQuery, conn, transaction);
-                                int remainingRows = (int)countCmd.ExecuteScalar();
-
-                                // 3. Reset identity if table is empty
-                                if (remainingRows == 0)
-                                {
-                                    SqlCommand resetCmd = new SqlCommand(
-                                        "DBCC CHECKIDENT ('authorizedCards', RESEED, 0)",
-                                        conn, transaction);
-                                    resetCmd.ExecuteNonQuery();
-                                }
-
-                                transaction.Commit();
-                                Log($"Successfully removed UID: {uidToRemove}");
-                                LoadAuthorizedCards();
-                            }
-                            else
-                            {
-                                Log("No records were deleted.");
-                            }
-                        }
-                        catch
-                        {
-                            transaction.Rollback();
-                            throw;
-                        }
-                    }
+                    Log($"Removed card Id={id} via API");
+                    await LoadAuthorizedCardsAsync();
+                }
+                else
+                {
+                    Log("Delete failed: " + res.StatusCode);
                 }
             }
             catch (Exception ex)
             {
-                Log("Error removing UID: " + ex.Message);
+                Log("Error removing UID via API: " + ex.Message);
             }
         }
+
         private void Log(string message)
         {
             txtLog.AppendText($"{DateTime.Now}: {message}{Environment.NewLine}");

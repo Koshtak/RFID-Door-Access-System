@@ -10,3 +10,6 @@ CreatedAt datetime default getdate()
 insert into authorizedCards(CardUID, UserName)
 values('03:FB:91:F6', 'efe mehmet')
 select * from authorizedCards
+--düzenleme--
+EXEC sp_rename 'authorizedCards', 'AuthorizedCards'; 
+CREATE UNIQUE INDEX UX_AuthorizedCards_CardUID ON AuthorizedCards(CardUID);
