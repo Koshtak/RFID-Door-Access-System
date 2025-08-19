@@ -7,11 +7,11 @@ namespace rfidAPI.Data
     {
         public RfidDbContext(DbContextOptions<RfidDbContext> options) : base(options) { }
 
-        public DbSet<Card> Cards { get; set; }
+        public DbSet<Kayıt> Kayıt { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Card>()
+            modelBuilder.Entity<Kayıt>()
                 .HasIndex(c => c.KID)
                 .IsUnique();
         }

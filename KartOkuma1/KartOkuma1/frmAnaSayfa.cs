@@ -53,9 +53,11 @@ namespace KartOkuma1
         {
             string kartID = serialPort1.ReadLine();
 
+            if (!string.IsNullOrEmpty(kartID))
+                kartID = kartID.Substring(0, kartID.Length - 1);
+
             this.Invoke(new Action(() =>
             {
-                
                 txtKartID.Text = kartID;
             }));
         }
@@ -78,7 +80,8 @@ namespace KartOkuma1
             if(txtAD.Text != "" && txtSOYAD.Text != "" && txtKartID.Text != "")
             {
                 kaydet();
-               
+                temizle();
+
             }
             else
             {
@@ -223,6 +226,11 @@ namespace KartOkuma1
             {
                 rbHayir.Checked = true;
             }
+        }
+
+        private void txtKartID_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -17,7 +17,7 @@ const char* WIFI_SSID     = "eduroam";
 const char* WIFI_PASSWORD = "123321Aa";
 
 // Use your PC's LAN IP and API port from launchSettings.json
-String API_BASE = "http://10.0.13.159:7071/api/Cards";
+String API_BASE = "http://10.0.14.200:7071/api/Cards";
 
 // RC522 pins (ESP32 VSPI default: SCK=18, MISO=19, MOSI=23)
 #define RC522_SS_PIN   21

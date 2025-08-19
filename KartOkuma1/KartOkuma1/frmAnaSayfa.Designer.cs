@@ -54,8 +54,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.rbEvet = new System.Windows.Forms.RadioButton();
             this.rbHayir = new System.Windows.Forms.RadioButton();
-            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.lblKontrol = new System.Windows.Forms.Label();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -133,6 +133,7 @@
             this.txtKartID.Name = "txtKartID";
             this.txtKartID.Size = new System.Drawing.Size(120, 44);
             this.txtKartID.TabIndex = 9;
+            this.txtKartID.TextChanged += new System.EventHandler(this.txtKartID_TextChanged);
             // 
             // label5
             // 
@@ -352,7 +353,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tableLayoutPanel4.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.rbEvet, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.rbHayir, 2, 0);
@@ -401,10 +402,6 @@
             this.rbHayir.Text = "HAYIR";
             this.rbHayir.UseVisualStyleBackColor = true;
             // 
-            // serialPort1
-            // 
-            this.serialPort1.PortName = "COM4";
-            // 
             // lblKontrol
             // 
             this.lblKontrol.AutoSize = true;
@@ -416,6 +413,10 @@
             this.lblKontrol.Text = "label7";
             this.lblKontrol.Visible = false;
             this.lblKontrol.TextChanged += new System.EventHandler(this.lblKontrol_TextChanged);
+            // 
+            // serialPort1
+            // 
+            this.serialPort1.PortName = "COM4";
             // 
             // frmAnaSayfa
             // 

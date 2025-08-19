@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace rfidAPI.Models
 {
-    public class Card
+    public class Kayıt
     {
         public int Id { get; set; }
 
