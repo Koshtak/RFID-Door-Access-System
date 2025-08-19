@@ -13,23 +13,22 @@
 #include <ArduinoJson.h>
 
 // ---------- CONFIG ----------
-const char* WIFI_SSID     = "YOUR_WIFI_SSID";
-const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
+const char* WIFI_SSID     = "eduroam";
+const char* WIFI_PASSWORD = "123321Aa";
 
 // Use your PC's LAN IP and API port from launchSettings.json
 String API_BASE = "http://10.0.13.159:7071/api/Cards";
 
 // RC522 pins (ESP32 VSPI default: SCK=18, MISO=19, MOSI=23)
-#define RC522_SS_PIN   5
-#define RC522_RST_PIN  27
+#define RC522_SS_PIN   21
+#define RC522_RST_PIN  22
 
 // I2C LCD
-LiquidCrystal_I2C lcd(0x27, 16, 2);
+
 
 // Outputs
-#define GREEN_LED 16
-#define RED_LED   17
-#define BUZZER     4
+#define GREEN_LED 13
+#define RED_LED   14
 
 // Objects
 MFRC522 rfid(RC522_SS_PIN, RC522_RST_PIN);
@@ -61,28 +60,19 @@ String urlEncodeColons(const String& s) {
   return out;
 }
 
-void showLCD(const String& line1, const String& line2) {
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print(line1.substring(0, 16));
-  lcd.setCursor(0, 1);
-  lcd.print(line2.substring(0, 16));
-}
+
 
 void grantAccess() {
   digitalWrite(GREEN_LED, HIGH);
-  showLCD("Access Granted", "");
   delay(1000);
   digitalWrite(GREEN_LED, LOW);
 }
 
 void denyAccess() {
   digitalWrite(RED_LED, HIGH);
-  digitalWrite(BUZZER, HIGH);
-  showLCD("Access Denied", "");
+ 
   delay(1000);
   digitalWrite(RED_LED, LOW);
-  digitalWrite(BUZZER, LOW);
 }
 
 bool checkAuthorized(const String& uid) {
@@ -124,15 +114,11 @@ void setup() {
   // GPIOs
   pinMode(GREEN_LED, OUTPUT);
   pinMode(RED_LED, OUTPUT);
-  pinMode(BUZZER, OUTPUT);
   digitalWrite(GREEN_LED, LOW);
   digitalWrite(RED_LED, LOW);
-  digitalWrite(BUZZER, LOW);
 
   // LCD
-  lcd.init();
-  lcd.backlight();
-  showLCD("RFID System", "Connecting WiFi");
+  
 
   // WiFi
   WiFi.mode(WIFI_STA);
@@ -145,16 +131,16 @@ void setup() {
   if (WiFi.status() == WL_CONNECTED) {
     Serial.print("\nWiFi OK, IP: ");
     Serial.println(WiFi.localIP());
-    showLCD("WiFi OK", WiFi.localIP().toString());
+    
   } else {
-    showLCD("WiFi FAIL", "Check SSID/Pass");
+   
   }
   delay(1000);
 
   // RC522 (SPI)
   SPI.begin(18, 19, 23, RC522_SS_PIN);  // SCK, MISO, MOSI, SS
   rfid.PCD_Init(); // with pins from constructor
-  showLCD("RFID Ready", "");
+
   delay(500);
 }
 
@@ -167,7 +153,6 @@ void loop() {
 
   String uid = toHexUid(rfid.uid);
   Serial.print("UID: "); Serial.println(uid);
-  showLCD("UID:", uid);
 
   bool ok = checkAuthorized(uid);
   if (ok) grantAccess();
