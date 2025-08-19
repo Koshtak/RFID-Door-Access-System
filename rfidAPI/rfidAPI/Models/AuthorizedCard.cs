@@ -1,15 +1,23 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+
 namespace rfidAPI.Models
 {
-    public class AuthorizedCard
+    public class Card
     {
         public int Id { get; set; }
 
         [Required, MaxLength(50)]
-        public string CardUID { get; set; } = string.Empty; // Default value added
+        public string KID { get; set; } = string.Empty; // Kart UID
 
-        public string UserName { get; set; } = string.Empty; // Default value added
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [MaxLength(50)]
+        public string Name { get; set; } = string.Empty;
+
+        [MaxLength(50)]
+        public string SName { get; set; } = string.Empty;
+
+        public DateTime Date { get; set; } = DateTime.UtcNow;
+
+        public bool Yetki { get; set; } = false; // Geçiş izni
     }
 }
