@@ -1,7 +1,7 @@
 # RFID-Door-Access-System
 RFID Access System using Arduino + C# + MS SQL
 
-##System Overview
+## System Overview
 RFID Card Scan → 
   The RC522 module reads the card UID.
 
@@ -14,14 +14,14 @@ Response →
   Verified → Green LED, LCD shows user name.
   Denied → Red LED.
 
-##How to Run
+## How to Run
 -Clone this repository.
 -Set up the SQL Server database and update the connection string in appsettings.json.
 -Run the ASP.NET Core API (dotnet run or from Visual Studio).
 -Upload the Arduino/ESP32 sketches to your boards.
 -Launch the WinForms app for admin operations.
 
-##Hardware Components
+## Hardware Components
 Arduino Uno
 ESP32
 RC522 RFID Reader
